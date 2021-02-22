@@ -12,12 +12,15 @@ const outputPath = path.join(OUTPUT_DIR, "team.html");
 const teamMembers = [];
 const idArray = [];
 
+addTeam();
+
 function addTeam() {
+  
   function createTeam(){
     inquirer.prompt([
     {
       type: "list",
-      name: "AddEmployee",
+      name: "addEmployee",
       message: "Add an employee or select 'Finish'.",
       choices: [
         "Manager",
@@ -26,22 +29,29 @@ function addTeam() {
         "Finish",
       ]
     }
-  ]).then((data) => {
+  ]).then(data => {
     const employeeRole = data.addEmployee;
+
     if (employeeRole === "Manager") {
+      console.log("reaches manager");
       managerInfo();
     }
      else if (employeeRole === "Engineer") {
+      console.log("reaches engineer");
        engineerInfo();
      }
      else if (employeeRole === "Intern") {
+      console.log("reaches intern");
        internInfo();
      }
      else if (employeeRole === "Finish") {
+      console.log("reaches finish");
        renderTeam();
      }
-  });
+
+    });
   }
+
   function managerInfo() {
     inquirer.prompt([
       {
@@ -64,12 +74,13 @@ function addTeam() {
         type: "input",
         name: "managerOfficeNumber",
         message: "What is the team manager's office number?"
-      },
+      } 
     ]).then(answers => {
       const manager = new Manager(answers.managerName, answers.managerId, answers.managerEmail, answers.managerOfficeNumber);
       teamMembers.push(manager);
       idArray.push(answers.managerId);
       addTeam();
+ 
     });
   }
 
@@ -140,7 +151,8 @@ function addTeam() {
     if (!fs.existsSync(OUTPUT_DIR)) {
       fs.mkdirSync(OUTPUT_DIR)
     }
-    fs.writeFileSync(outputPath, render(teamMembers), "utf-8");
+
+    fs.writeFileSync(outputPath, htmlframework(teamMembers), "utf-8");
   }
 
   createTeam();
@@ -149,4 +161,3 @@ function addTeam() {
 
 
 
-addTeam();
