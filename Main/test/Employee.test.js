@@ -28,6 +28,6 @@ describe("Employee class", () => {
   test("Testing function getRole", () => {
     const employee = new Employee("Eric", 4, "Erictn3@uci.edu");
     expect(employee.getRole()).toEqual("Employee");
-  })
+  });
 
-})
+});
