@@ -104,7 +104,7 @@ function addTeam() {
       },
       {
         type: "input",
-        name: "engineerOfficeNumber",
+        name: "engineerGithub",
         message: "What is the team engineer's github name?"
       },
     ]).then(answers => {
